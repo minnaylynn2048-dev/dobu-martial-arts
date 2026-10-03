@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes & Timetable – DoBu Martial Arts</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+                   CSS VARIABLES
+                   ============================================================ */
+        :root {
+            --primary: #c0392b;
+            --primary-dark: #a93226;
+            --primary-light: #e74c3c;
+            --dark: #1a1a1a;
+            --dark-light: #2d2d2d;
+            --gray: #777;
+            --gray-light: #f4f4f4;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.18);
+            --radius: 16px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--gray-light);
+            color: var(--dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+                   BUTTONS
+                   ============================================================ */
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(192, 57, 43, 0.45);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 36px;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: var(--white);
+            padding: 8px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* ============================================================
+                   SECTION HEADERS
+                   ============================================================ */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 8px auto 0;
+        }
+
+        /* ============================================================
+                   NAVIGATION (WITH AUTH)
+                   ============================================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--dark);
+            padding: 14px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: #ccc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--white);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta-btn {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .nav-cta-btn::after {
+            display: none !important;
+        }
+
+        .nav-cta-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Auth Links in Nav */
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ccc;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .nav-auth .auth-link {
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .nav-auth .auth-link:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-auth .user-greeting {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ============================================================
+                   CLASSES HERO
+                   ============================================================ */
+        .classes-hero {
+            position: relative;
+            height: 55vh;
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .classes-hero .bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.45) saturate(1.2);
+            z-index: 0;
+        }
+
+        .classes-hero .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 24px;
+        }
+
+        .classes-hero .content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .classes-hero .content p {
+            font-size: 1.3rem;
+            opacity: 0.92;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .classes-hero .breadcrumb {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .classes-hero .breadcrumb a {
+            color: var(--primary-light);
+        }
+
+        .classes-hero .breadcrumb a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================================
+                   MARTIAL ARTS DISCIPLINES
+                   ============================================================ */
+        .disciplines {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .discipline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .discipline-card {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .discipline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-left-color: var(--primary);
+        }
+
+        .discipline-card .icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .discipline-card .info h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .discipline-card .info .meta {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .discipline-card .info p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================================
+                   TIMETABLE
+                   ============================================================ */
+        .timetable-section {
+            padding: 80px 0;
+            background: var(--gray-light);
+        }
+
+        .timetable-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 700px;
+            font-size: 0.9rem;
+        }
+
+        .timetable thead th {
+            background: var(--dark);
+            color: var(--white);
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .timetable thead th:first-child {
+            background: var(--primary);
+            min-width: 120px;
+        }
+
+        .timetable tbody td {
+            padding: 14px 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .timetable tbody tr:hover td {
+            background: rgba(192, 57, 43, 0.04);
+        }
+
+        .timetable tbody td:first-child {
+            font-weight: 700;
+            color: var(--primary);
+            background: #fafafa;
+        }
+
+        .timetable .badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-kids {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+        .badge-private {
+            background: #f39c12;
+            color: #fff;
+        }
+
+        .badge-open {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .badge-muaythai {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .badge-jiujitsu {
+            background: #9b59b6;
+            color: #fff;
+        }
+
+        .badge-karate {
+            background: #e67e22;
+            color: #fff;
+        }
+
+        .badge-judo {
+            background: #1abc9c;
+            color: #fff;
+        }
+
+        /* ============================================================
+                   SPECIALIST COURSES
+                   ============================================================ */
+        .specialist {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .specialist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .specialist-card {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .specialist-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .specialist-card i {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .specialist-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .specialist-card .price {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+
+        .specialist-card .price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        .specialist-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================================
+                   PRIVATE TUITION
+                   ============================================================ */
+        .private-tuition {
+            padding: 60px 0;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .private-tuition .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .private-tuition h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .private-tuition .price-tag {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .private-tuition .price-tag span {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #aaa;
+        }
+
+        .private-tuition p {
+            color: #bbb;
+            font-size: 1.05rem;
+            margin: 12px 0;
+        }
+
+        .private-tuition ul {
+            margin-top: 16px;
+        }
+
+        .private-tuition ul li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ddd;
+        }
+
+        .private-tuition ul li i {
+            color: var(--primary);
+        }
+
+        /* ============================================================
+                   CTA BANNER
+                   ============================================================ */
+        .cta {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            padding: 64px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 32px;
+        }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        footer {
+            background: #0d0d0d;
+            color: #aaa;
+            padding: 56px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-grid h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-grid ul li {
+            padding: 4px 0;
+        }
+
+        .footer-grid ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .footer-social a {
+            font-size: 1.6rem;
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2a2a2a;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================
+                   ANIMATIONS
+                   ============================================================ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+                   MODALS (Login / Register)
+                   ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 36px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            animation: modalIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-box .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .modal-box .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-box h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .modal-box .subtitle {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .modal-box .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal-box .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .modal-box .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--gray-light);
+        }
+
+        .modal-box .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.1);
+        }
+
+        .modal-box .form-error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .modal-box .form-error.show {
+            display: block;
+        }
+
+        .modal-box .form-actions {
+            margin-top: 24px;
+        }
+
+        .modal-box .form-actions .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+
+        .modal-box .switch-auth {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .modal-box .switch-auth a {
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .modal-box .switch-auth a:hover {
+            text-decoration: underline;
+        }
+
+        /* Lockout timer */
+        .lockout-timer {
+            background: #fde8e8;
+            border: 1px solid #f5c6c6;
+            color: #c0392b;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .lockout-timer.show {
+            display: block;
+        }
+
+        /* ============================================================
+                   COOKIE CONSENT BANNER
+                   ============================================================ */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark);
+            color: #ddd;
+            padding: 20px 24px;
+            z-index: 2000;
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            border-top: 3px solid var(--primary);
+        }
+
+        .cookie-banner.show {
+            display: block;
+        }
+
+        .cookie-banner .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cookie-banner .cookie-text {
+            flex: 1;
+            font-size: 0.9rem;
+            min-width: 200px;
+        }
+
+        .cookie-banner .cookie-text a {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .cookie-banner .cookie-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner .btn-cookie-accept {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cookie-banner .btn-cookie-accept:hover {
+            background: var(--primary-dark);
+            transform: scale(1.03);
+        }
+
+        .cookie-banner .btn-cookie-reject {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #555;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cookie-banner .btn-cookie-reject:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .discipline-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .specialist-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .private-tuition .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .private-tuition ul li {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--dark);
+                padding: 20px 0;
+                gap: 16px;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-auth {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .classes-hero {
+                height: 45vh;
+                min-height: 280px;
+            }
+            .classes-hero .content h1 {
+                font-size: 2.4rem;
+            }
+            .classes-hero .content p {
+                font-size: 1rem;
+            }
+
+            .discipline-grid {
+                grid-template-columns: 1fr;
+            }
+            .discipline-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .specialist-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .timetable-wrapper {
+                border-radius: 0;
+            }
+            .timetable {
+                font-size: 0.75rem;
+                min-width: 600px;
+            }
+            .timetable thead th,
+            .timetable tbody td {
+                padding: 10px 6px;
+            }
+
+            .modal-box {
+                padding: 28px 20px;
+            }
+
+            .cookie-banner .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .classes-hero .content h1 {
+                font-size: 1.8rem;
+            }
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+            .btn-primary {
+                padding: 12px 28px;
+                font-size: 0.85rem;
+            }
+            .private-tuition .price-tag {
+                font-size: 2.6rem;
+            }
+            .timetable {
+                font-size: 0.7rem;
+                min-width: 520px;
+            }
+            .timetable .badge {
+                font-size: 0.6rem;
+                padding: 1px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAVIGATION (WITH AUTH)
+    ============================================================ -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">DoBu<span>.</span></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="classes.html" style="color:#fff;">Classes</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="Instructor.html">Instructors</a></li>
+                <li><a href="forumn.html">Forum</a></li>
+                <li><a href="#" class="nav-cta-btn" id="joinNowNav">Join Now</a></li>
+                <!-- Auth Section -->
+                <li class="nav-auth" id="authSection">
+                    <span id="authLinks">
+                        <span class="auth-link" id="loginNavBtn"><i class="fas fa-sign-in-alt"></i> Login</span>
+                        <span class="auth-link" id="registerNavBtn"><i class="fas fa-user-plus"></i> Register</span>
+                    </span>
+                    <span id="userGreeting" style="display:none;">
+                        <span class="user-greeting"><i class="fas fa-user-circle"></i> <span id="displayName">User</span></span>
+                        <button class="btn-danger" id="logoutBtn" style="padding:4px 14px; font-size:0.75rem;">Logout</button>
+                    </span>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    CLASSES HERO
+    ============================================================ -->
+    <section class="classes-hero">
+        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1400');"></div>
+        <div class="content">
+            <h1>Our Classes</h1>
+            <p>Master your mind and body with our diverse range of martial arts.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; Classes
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    MARTIAL ARTS DISCIPLINES
+    ============================================================ -->
+    <section class="disciplines">
+        <div class="container">
+            <div class="section-header">
+                <h2>Martial Arts Disciplines</h2>
+                <p>Find the style that resonates with your goals and personality.</p>
+            </div>
+            <div class="discipline-grid animate-on-scroll">
+                <!-- Jiu-jitsu -->
+                <div class="discipline-card">
+                    <div class="icon"><i class="fas fa-hand-fist"></i></div>
+                    <div class="info">
+                        <h3>Jiu-jitsu</h3>
+                        <p class="meta">Ground Fighting · Submission Grappling</p>
+                        <p>
+                            A soft-style martial art that focuses on leverage, technique,
+                            and ground control. Perfect for smaller individuals who want to
+                            defend against larger opponents.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Judo -->
+                <div class="discipline-card">
+                    <div class="icon"><i class="fas fa-people-arrows"></i></div>
+                    <div class="info">
+                        <h3>Judo</h3>
+                        <p class="meta">Throws · Takedowns · Balance</p>
+                        <p>
+                            The "gentle way" – a dynamic sport that teaches powerful throws,
+                            joint locks, and pins. Builds explosive strength, agility, and
+                            mental focus.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Karate -->
+                <div class="discipline-card">
+                    <div class="icon"><i class="fas fa-fist-raised"></i></div>
+                    <div class="info">
+                        <h3>Karate</h3>
+                        <p class="meta">Striking · Kata · Self-Defense</p>
+                        <p>
+                            A traditional striking art that develops precision, speed, and
+                            discipline. Learn powerful punches, kicks, and blocks while
+                            mastering the art of kata.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Muay Thai -->
+                <div class="discipline-card">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <div class="info">
+                        <h3>Muay Thai</h3>
+                        <p class="meta">The Art of Eight Limbs · Striking</p>
+                        <p>
+                            A high-intensity striking art that utilizes fists, elbows, knees,
+                            and shins. Builds cardiovascular endurance, power, and
+                            unshakable toughness.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WEEKLY TIMETABLE
+    ============================================================ -->
+    <section class="timetable-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weekly Class Timetable</h2>
+                <p>Find a session that fits your schedule – classes run 7 days a week.</p>
+            </div>
+            <div class="timetable-wrapper animate-on-scroll">
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 06:00 – 07:30 -->
+                        <tr>
+                            <td>06:00 – 07:30</td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-karate">Karate</span></td>
+                            <td><span class="badge badge-judo">Judo</span></td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+
+                        <!-- 08:00 – 10:00 -->
+                        <tr>
+                            <td>08:00 – 10:00</td>
+                            <td><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                        </tr>
+
+                        <!-- 10:30 – 12:00 -->
+                        <tr>
+                            <td>10:30 – 12:00</td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td><span class="badge badge-judo">Judo</span></td>
+                            <td><span class="badge badge-karate">Karate</span></td>
+                        </tr>
+
+                        <!-- 13:00 – 14:30 -->
+                        <tr>
+                            <td>13:00 – 14:30</td>
+                            <td><span class="badge badge-open">Open Mat</span></td>
+                            <td><span class="badge badge-open">Open Mat</span></td>
+                            <td><span class="badge badge-open">Open Mat</span></td>
+                            <td><span class="badge badge-open">Open Mat</span></td>
+                            <td><span class="badge badge-open">Open Mat</span></td>
+                            <td><span class="badge badge-karate">Karate</span></td>
+                            <td><span class="badge badge-judo">Judo</span></td>
+                        </tr>
+
+                        <!-- 15:00 – 17:00 -->
+                        <tr>
+                            <td>15:00 – 17:00</td>
+                            <td><span class="badge badge-kids">Kids Jiu-jitsu</span></td>
+                            <td><span class="badge badge-kids">Kids Judo</span></td>
+                            <td><span class="badge badge-kids">Kids Karate</span></td>
+                            <td><span class="badge badge-kids">Kids Jiu-jitsu</span></td>
+                            <td><span class="badge badge-kids">Kids Judo</span></td>
+                            <td><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                        </tr>
+
+                        <!-- 17:30 – 19:00 -->
+                        <tr>
+                            <td>17:30 – 19:00</td>
+                            <td><span class="badge badge-karate">Karate</span></td>
+                            <td><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td><span class="badge badge-judo">Judo</span></td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+
+                        <!-- 19:00 – 21:00 -->
+                        <tr>
+                            <td>19:00 – 21:00</td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-judo">Judo</span></td>
+                            <td><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td><span class="badge badge-karate">Karate</span></td>
+                            <td><span class="badge badge-private">Private</span></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align:center; margin-top: 20px; color:var(--gray); font-size:0.9rem;">
+                <i class="fas fa-info-circle"></i> 
+                <span class="badge badge-kids">Kids</span> = Ages 6–12 &nbsp;|&nbsp; 
+                <span class="badge badge-private">Private</span> = 1-on-1 Coaching &nbsp;|&nbsp; 
+                <span class="badge badge-open">Open Mat</span> = Free Practice
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SPECIALIST COURSES & FITNESS
+    ============================================================ -->
+    <section class="specialist">
+        <div class="container">
+            <div class="section-header">
+                <h2>Specialist Courses &amp; Fitness</h2>
+                <p>Take your training to the next level with our specialised programs.</p>
+            </div>
+            <div class="specialist-grid animate-on-scroll">
+                <!-- Self-Defense -->
+                <div class="specialist-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Self-Defense Course</h3>
+                    <div class="price">£180</div>
+                    <p>6-week beginner's course. 2 x 1-hour sessions per week. Learn practical, real-world self-defense techniques.</p>
+                </div>
+
+                <!-- Fitness Room -->
+                <div class="specialist-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Fitness Room Access</h3>
+                    <div class="price">£6 <span>/visit</span></div>
+                    <p>Fully-equipped gym with cardio, strength, and functional training equipment. Available during all opening hours.</p>
+                </div>
+
+                <!-- Personal Training -->
+                <div class="specialist-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Personal Fitness Training</h3>
+                    <div class="price">£35 <span>/hour</span></div>
+                    <p>1-on-1 coaching with our certified fitness specialists. Tailored programs for weight loss, strength, or sport-specific conditioning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PRIVATE TUITION
+    ============================================================ -->
+    <section class="private-tuition">
+        <div class="container">
+            <div>
+                <h2>Private Martial Arts Tuition</h2>
+                <div class="price-tag">£15 <span>/ hour</span></div>
+                <p>Accelerate your progress with dedicated 1-on-1 coaching from our expert instructors.</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Personalised attention</li>
+                    <li><i class="fas fa-check-circle"></i> Flexible scheduling</li>
+                    <li><i class="fas fa-check-circle"></i> Focus on your specific goals</li>
+                    <li><i class="fas fa-check-circle"></i> Available for all disciplines</li>
+                </ul>
+            </div>
+            <div style="text-align:center;">
+                <img src="https://images.unsplash.com/photo-1574958269340-fa927503f3dd?w=600" alt="Private Tuition" style="border-radius:var(--radius); width:100%; max-width:500px; height:300px; object-fit:cover; box-shadow:var(--shadow); margin:0 auto;" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA BANNER
+    ============================================================ -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Training?</h2>
+            <p>Book your first class today and experience the DoBu difference.</p>
+            <a href="#" class="btn-primary" style="font-size: 1.1rem; padding: 16px 48px;">Book Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="font-size:1.6rem;">DoBu<span>.</span></div>
+                    <p style="margin-top: 12px; max-width: 280px;">
+                        Building strength, discipline, and confidence through
+                        world-class martial arts training.
+                    </p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="classes.html">Classes</a></li>
+                        <li><a href="prices.html">Prices</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 DoBu Martial Arts. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    COOKIE CONSENT BANNER
+    ============================================================ -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="container">
+            <div class="cookie-text">
+                <strong><i class="fas fa-cookie-bite"></i> We value your privacy.</strong>
+                We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                <a href="#">Learn More</a>.
+            </div>
+            <div class="cookie-actions">
+                <button class="btn-cookie-reject" id="rejectCookies">Reject</button>
+                <button class="btn-cookie-accept" id="acceptCookies">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    LOGIN MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+            <h2><i class="fas fa-sign-in-alt" style="color:var(--primary);"></i> Login</h2>
+            <p class="subtitle">Welcome back! Please log in to your account.</p>
+
+            <div class="lockout-timer" id="lockoutTimer">
+                <i class="fas fa-clock"></i> Too many failed attempts. Please wait <span id="lockoutCountdown">180</span> seconds.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required />
+                </div>
+                <div class="form-error" id="loginError">Invalid email or password.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+                <div class="switch-auth">
+                    Don't have an account? <a id="switchToRegisterFromLogin">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    REGISTER MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeRegisterModal">&times;</button>
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Create Account</h2>
+            <p class="subtitle">Join the DoBu community today. It's free!</p>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" placeholder="John Doe" required />
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Min 6 characters" required minlength="6" />
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password" required />
+                </div>
+                <div class="form-error" id="registerError">Passwords do not match or email already exists.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Register</button>
+                </div>
+                <div class="switch-auth">
+                    Already have an account? <a id="switchToLoginFromRegister">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================
+            // 1. MOBILE HAMBURGER MENU
+            // ============================================
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('open');
+            });
+
+            navMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                }
+            });
+
+            // ============================================
+            // 2. SCROLL ANIMATIONS (Intersection Observer)
+            // ============================================
+            document.addEventListener('DOMContentLoaded', function() {
+
+                const grids = document.querySelectorAll(
+                    '.discipline-grid, .timetable-wrapper, .specialist-grid'
+                );
+
+                grids.forEach(function(grid) {
+                    const children = grid.querySelectorAll(
+                        '.discipline-card, .specialist-card'
+                    );
+                    if (!grid.classList.contains('timetable-wrapper')) {
+                        children.forEach(function(child, index) {
+                            child.style.transitionDelay = (index * 0.08) + 's';
+                        });
+                    }
+                });
+
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+
+                document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+                    observer.observe(el);
+                });
+
+            });
+
+            // ============================================
+            // 3. AUTH SYSTEM (Login / Register / Logout / Lockout)
+            // ============================================
+
+            // --- DOM refs ---
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            const loginNavBtn = document.getElementById('loginNavBtn');
+            const registerNavBtn = document.getElementById('registerNavBtn');
+            const joinNowNav = document.getElementById('joinNowNav');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const closeRegisterModal = document.getElementById('closeRegisterModal');
+            const switchToRegister = document.getElementById('switchToRegisterFromLogin');
+            const switchToLogin = document.getElementById('switchToLoginFromRegister');
+
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const loginError = document.getElementById('loginError');
+            const registerError = document.getElementById('registerError');
+            const lockoutTimer = document.getElementById('lockoutTimer');
+            const lockoutCountdown = document.getElementById('lockoutCountdown');
+
+            const authLinks = document.getElementById('authLinks');
+            const userGreeting = document.getElementById('userGreeting');
+            const displayName = document.getElementById('displayName');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // --- Helpers ---
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('dobu_users')) || [];
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('dobu_users', JSON.stringify(users));
+            }
+
+            function getCurrentUser() {
+                return JSON.parse(localStorage.getItem('dobu_current_user'));
+            }
+
+            function setCurrentUser(user) {
+                localStorage.setItem('dobu_current_user', JSON.stringify(user));
+            }
+
+            function clearCurrentUser() {
+                localStorage.removeItem('dobu_current_user');
+            }
+
+            function getFailedAttempts() {
+                return parseInt(localStorage.getItem('dobu_failed_attempts')) || 0;
+            }
+
+            function setFailedAttempts(count) {
+                localStorage.setItem('dobu_failed_attempts', count.toString());
+            }
+
+            function getLockoutUntil() {
+                return parseInt(localStorage.getItem('dobu_lockout_until')) || 0;
+            }
+
+            function setLockoutUntil(timestamp) {
+                localStorage.setItem('dobu_lockout_until', timestamp.toString());
+            }
+
+            function isLockedOut() {
+                const until = getLockoutUntil();
+                return until > Date.now();
+            }
+
+            function getRemainingLockoutSeconds() {
+                const until = getLockoutUntil();
+                if (until <= Date.now()) return 0;
+                return Math.floor((until - Date.now()) / 1000);
+            }
+
+            // --- UI Update ---
+            function updateAuthUI() {
+                const user = getCurrentUser();
+                if (user) {
+                    authLinks.style.display = 'none';
+                    userGreeting.style.display = 'inline-flex';
+                    displayName.textContent = user.name || user.email;
+                } else {
+                    authLinks.style.display = 'inline-flex';
+                    userGreeting.style.display = 'none';
+                }
+            }
+
+            // --- Open / Close Modals ---
+            function openModal(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                loginError.classList.remove('show');
+                registerError.classList.remove('show');
+                if (modal === loginModal) {
+                    if (isLockedOut()) {
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                    } else {
+                        lockoutTimer.classList.remove('show');
+                    }
+                }
+            }
+
+            function closeModal(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (window._lockoutInterval) {
+                    clearInterval(window._lockoutInterval);
+                    window._lockoutInterval = null;
+                }
+            }
+
+            function startLockoutTimer() {
+                if (window._lockoutInterval) clearInterval(window._lockoutInterval);
+                window._lockoutInterval = setInterval(function() {
+                    const remaining = getRemainingLockoutSeconds();
+                    if (remaining <= 0) {
+                        lockoutTimer.classList.remove('show');
+                        clearInterval(window._lockoutInterval);
+                        window._lockoutInterval = null;
+                        setFailedAttempts(0);
+                        setLockoutUntil(0);
+                        return;
+                    }
+                    lockoutCountdown.textContent = remaining;
+                }, 1000);
+                const rem = getRemainingLockoutSeconds();
+                if (rem > 0) lockoutCountdown.textContent = rem;
+            }
+
+            // --- Event listeners for modals ---
+            loginNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(loginModal);
+            });
+            registerNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+            joinNowNav.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+
+            closeLoginModal.addEventListener('click', function() { closeModal(loginModal); });
+            closeRegisterModal.addEventListener('click', function() { closeModal(registerModal); });
+
+            switchToRegister.addEventListener('click', function() {
+                closeModal(loginModal);
+                openModal(registerModal);
+            });
+            switchToLogin.addEventListener('click', function() {
+                closeModal(registerModal);
+                openModal(loginModal);
+            });
+
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) closeModal(loginModal);
+            });
+            registerModal.addEventListener('click', function(e) {
+                if (e.target === registerModal) closeModal(registerModal);
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('active')) closeModal(loginModal);
+                    if (registerModal.classList.contains('active')) closeModal(registerModal);
+                }
+            });
+
+            // --- Register ---
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('regFullName').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regConfirmPassword').value;
+
+                registerError.classList.remove('show');
+
+                if (pass !== confirm) {
+                    registerError.textContent = 'Passwords do not match.';
+                    registerError.classList.add('show');
+                    return;
+                }
+                if (pass.length < 6) {
+                    registerError.textContent = 'Password must be at least 6 characters.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const users = getUsers();
+                if (users.find(u => u.email === email)) {
+                    registerError.textContent = 'This email is already registered. Please login.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const newUser = { name, email, password: pass };
+                users.push(newUser);
+                saveUsers(users);
+
+                setCurrentUser({ name, email });
+                updateAuthUI();
+                closeModal(registerModal);
+                registerForm.reset();
+                alert('✅ Registration successful! Welcome to DoBu, ' + name + '!');
+            });
+
+            // --- Login ---
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('loginPassword').value;
+
+                loginError.classList.remove('show');
+
+                if (isLockedOut()) {
+                    loginError.textContent = 'Account locked. Please wait ' + getRemainingLockoutSeconds() +
+                        ' seconds.';
+                    loginError.classList.add('show');
+                    lockoutTimer.classList.add('show');
+                    startLockoutTimer();
+                    return;
+                }
+
+                const users = getUsers();
+                const user = users.find(u => u.email === email && u.password === pass);
+
+                if (!user) {
+                    let attempts = getFailedAttempts() + 1;
+                    setFailedAttempts(attempts);
+
+                    if (attempts >= 3) {
+                        const lockUntil = Date.now() + 180000;
+                        setLockoutUntil(lockUntil);
+                        setFailedAttempts(0);
+                        loginError.textContent = 'Too many failed attempts. Account locked for 3 minutes.';
+                        loginError.classList.add('show');
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                        return;
+                    }
+
+                    loginError.textContent = `Invalid email or password. (${attempts}/3 attempts)`;
+                    loginError.classList.add('show');
+                    return;
+                }
+
+                setFailedAttempts(0);
+                setLockoutUntil(0);
+                setCurrentUser({ name: user.name, email: user.email });
+                updateAuthUI();
+                closeModal(loginModal);
+                loginForm.reset();
+                alert('👋 Welcome back, ' + user.name + '!');
+            });
+
+            // --- Logout ---
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    clearCurrentUser();
+                    updateAuthUI();
+                    alert('You have been logged out.');
+                }
+            });
+
+            // --- Initialize Auth UI ---
+            updateAuthUI();
+
+            // ============================================
+            // 4. COOKIE CONSENT
+            // ============================================
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const rejectCookies = document.getElementById('rejectCookies');
+
+            function checkCookieConsent() {
+                const consent = localStorage.getItem('dobu_cookie_consent');
+                if (consent === null) {
+                    cookieBanner.classList.add('show');
+                } else {
+                    cookieBanner.classList.remove('show');
+                }
+            }
+
+            function setCookieConsent(value) {
+                localStorage.setItem('dobu_cookie_consent', value);
+                cookieBanner.classList.remove('show');
+            }
+
+            acceptCookies.addEventListener('click', function() {
+                setCookieConsent('accepted');
+            });
+
+            rejectCookies.addEventListener('click', function() {
+                setCookieConsent('rejected');
+            });
+
+            checkCookieConsent();
+
+        })();
+    </script>
+
+</body>
+</html>

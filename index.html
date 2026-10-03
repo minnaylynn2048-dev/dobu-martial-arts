@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoBu Martial Arts – Home</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">DoBu<span>.</span></div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="Instructor.html">Instructors</a></li>
+                <li><a href="forumn.html">Forum</a></li>
+                <li><a href="#" class="nav-cta-btn" id="joinNowNav">Join Now</a></li>
+                <!-- Auth Section -->
+                <li class="nav-auth" id="authSection">
+                    <span id="authLinks">
+                        <span class="auth-link" id="loginNavBtn"><i class="fas fa-sign-in-alt"></i> Login</span>
+                        <span class="auth-link" id="registerNavBtn"><i class="fas fa-user-plus"></i> Register</span>
+                    </span>
+                    <span id="userGreeting" style="display:none;">
+                        <span class="user-greeting"><i class="fas fa-user-circle"></i> <span id="displayName">User</span></span>
+                        <button class="btn-danger" id="logoutBtn" style="padding:4px 14px; font-size:0.75rem;">Logout</button>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    HERO SLIDER
+    ============================================================ -->
+    <section class="hero" id="heroSlider" aria-label="Hero banner">
+
+        <!-- Slide 1 -->
+        <div class="hero-slide active" data-index="0">
+            <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1400');"></div>
+            <div class="content">
+                <h1>Welcome to DoBu</h1>
+                <p>Start Your Martial Arts Journey Today.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn-primary">Explore Classes</a>
+                    <a href="#" class="btn-outline">View Timetable</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero-slide" data-index="1">
+            <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1400');"></div>
+            <div class="content">
+                <h1>Judo · Jiu-jitsu · Karate · Muay Thai</h1>
+                <p>Classes for Everyone – From Age 6 to 60+.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn-primary">Meet Our Instructors</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide" data-index="2">
+            <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1400');"></div>
+            <div class="content">
+                <h1>Special Elite Offer</h1>
+                <p>Get 15% off Elite Membership this month only!</p>
+                <div class="btn-group">
+                    <a href="#" class="btn-primary">Claim Offer</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrows -->
+        <button class="hero-arrow left" id="prevBtn" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="hero-arrow right" id="nextBtn" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Dots -->
+        <div class="hero-dots" id="heroDots">
+            <span class="active" data-index="0"></span>
+            <span data-index="1"></span>
+            <span data-index="2"></span>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    STATS BAR
+    ============================================================ -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <h3>10+</h3>
+                    <p>Martial Arts Disciplines</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>6</h3>
+                    <p>Certified Instructors</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>🏋️</h3>
+                    <p>Gym · Sauna · Steam</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-smile"></i>
+                    <h3>500+</h3>
+                    <p>Happy Students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ABOUT
+    ============================================================ -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>DoBu Martial Arts</h2>
+                    <p>
+                        <strong>Where Strength Meets Discipline.</strong> Since 2010, we have been
+                        providing high-quality martial arts instruction in Yangon, empowering
+                        students of all ages to build confidence, fitness, and life skills.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Comprehensive Fitness Training</li>
+                        <li><i class="fas fa-check-circle"></i> Flexible Class Schedules</li>
+                        <li><i class="fas fa-check-circle"></i> Special Kids' Programs</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="margin-top: 8px;">Read More About Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600" alt="DoBu Gym interior" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    MARTIAL ARTS CARDS
+    ============================================================ -->
+    <section class="martial-arts">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Martial Arts</h2>
+                <p>Choose the discipline that fits your goals and personality.</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400" alt="Jiu-jitsu" />
+                    <h3>Jiu-jitsu</h3>
+                    <p>Flexibility &amp; Ground Fighting Techniques</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400" alt="Judo" />
+                    <h3>Judo</h3>
+                    <p>Throws, Balance &amp; Control</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400" alt="Karate" />
+                    <h3>Karate</h3>
+                    <p>Striking &amp; Self-Defense Mastery</p>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400" alt="Muay Thai" />
+                    <h3>Muay Thai</h3>
+                    <p>Strength, Power &amp; Endurance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PRICING
+    ============================================================ -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Membership Plans</h2>
+                <p>Choose the plan that best fits your training needs.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">£25 <span>/mo</span></div>
+                    <ul>
+                        <li>1 Martial Art</li>
+                        <li>2 Sessions Per Week</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="padding: 10px 32px; font-size: 0.9rem;">Join Now</a>
+                </div>
+
+                <!-- Advanced (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="badge">Popular</div>
+                    <h3>Advanced</h3>
+                    <div class="price">£45 <span>/mo</span></div>
+                    <ul>
+                        <li>2 Martial Arts</li>
+                        <li>5 Sessions Per Week</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="padding: 10px 32px; font-size: 0.9rem;">Join Now</a>
+                </div>
+
+                <!-- Elite -->
+                <div class="pricing-card">
+                    <h3>Elite</h3>
+                    <div class="price">£60 <span>/mo</span></div>
+                    <ul>
+                        <li>Unlimited Classes</li>
+                        <li>Gym &amp; Sauna Access</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="padding: 10px 32px; font-size: 0.9rem;">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    TESTIMONIALS SLIDER
+    ============================================================ -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Students Say</h2>
+                <p>Real experiences from our DoBu community.</p>
+            </div>
+
+            <div class="testi-slider" id="testiSlider">
+                <!-- Slide 1 -->
+                <div class="testi-slide active" data-index="0">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <blockquote>
+                        "After just 6 months at DoBu, my martial arts skills have improved
+                        dramatically. The coaches are world-class!"
+                    </blockquote>
+                    <div class="author">– Alex</div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="testi-slide" data-index="1">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <blockquote>
+                        "The best place for kids to learn discipline, respect, and confidence.
+                        My son absolutely loves it here."
+                    </blockquote>
+                    <div class="author">– A Parent</div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="testi-slide" data-index="2">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <blockquote>
+                        "The instructors' expertise is incredible. The Elite membership has
+                        been the best investment I've ever made."
+                    </blockquote>
+                    <div class="author">– Sarah</div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+
+            <!-- Testimonial Dots -->
+            <div class="testi-dots" id="testiDots">
+                <span class="active" data-index="0"></span>
+                <span data-index="1"></span>
+                <span data-index="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    INSTRUCTORS
+    ============================================================ -->
+    <section class="instructors">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Instructors</h2>
+                <p>Learn from the best – experienced, certified, and passionate.</p>
+            </div>
+            <div class="instructor-grid">
+                <div class="instructor-card">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200" alt="Mauricio Gomez" />
+                    <h4>Mauricio Gomez</h4>
+                    <p>4th Dan Judo · 3rd Dan Jiu-jitsu</p>
+                </div>
+                <div class="instructor-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200" alt="Sarah Nova" />
+                    <h4>Sarah Nova</h4>
+                    <p>5th Dan Karate</p>
+                </div>
+                <div class="instructor-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200" alt="Guy Victory" />
+                    <h4>Guy Victory</h4>
+                    <p>2nd Dan Jiu-jitsu · 1st Dan Judo</p>
+                </div>
+                <div class="instructor-card">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=200" alt="Traci Santiago" />
+                    <h4>Traci Santiago</h4>
+                    <p>BSc Sports Science · Nutrition</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA BANNER
+    ============================================================ -->
+    <section class="cta">
+        <div class="container">
+            <h2>Claim Your Free Trial Session</h2>
+            <p>Start your martial arts journey today – no commitment required.</p>
+            <a href="#" class="btn-primary" style="font-size: 1.1rem; padding: 16px 48px;">Book Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="font-size:1.6rem;">DoBu<span>.</span></div>
+                    <p style="margin-top: 12px; max-width: 280px;">
+                        Building strength, discipline, and confidence through
+                        world-class martial arts training.
+                    </p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Prices</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 DoBu Martial Arts. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    COOKIE CONSENT BANNER
+    ============================================================ -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="container">
+            <div class="cookie-text">
+                <strong><i class="fas fa-cookie-bite"></i> We value your privacy.</strong>
+                We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                <a href="#">Learn More</a>.
+            </div>
+            <div class="cookie-actions">
+                <button class="btn-cookie-reject" id="rejectCookies">Reject</button>
+                <button class="btn-cookie-accept" id="acceptCookies">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    LOGIN MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+            <h2><i class="fas fa-sign-in-alt" style="color:var(--primary);"></i> Login</h2>
+            <p class="subtitle">Welcome back! Please log in to your account.</p>
+
+            <div class="lockout-timer" id="lockoutTimer">
+                <i class="fas fa-clock"></i> Too many failed attempts. Please wait <span id="lockoutCountdown">180</span> seconds.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required />
+                </div>
+                <div class="form-error" id="loginError">Invalid email or password.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+                <div class="switch-auth">
+                    Don't have an account? <a id="switchToRegisterFromLogin">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    REGISTER MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeRegisterModal">&times;</button>
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Create Account</h2>
+            <p class="subtitle">Join the DoBu community today. It's free!</p>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" placeholder="John Doe" required />
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Min 6 characters" required minlength="6" />
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password" required />
+                </div>
+                <div class="form-error" id="registerError">Passwords do not match or email already exists.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Register</button>
+                </div>
+                <div class="switch-auth">
+                    Already have an account? <a id="switchToLoginFromRegister">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================
+            // 1. HERO SLIDER
+            // ============================================
+            const heroSlider = document.getElementById('heroSlider');
+            const heroSlides = heroSlider.querySelectorAll('.hero-slide');
+            const heroDots = heroSlider.querySelectorAll('#heroDots span');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentHero = 0;
+            let heroInterval;
+
+            function goToHero(index) {
+                heroSlides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                heroDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index); 
+                });
+                currentHero = index;
+            }
+
+            function nextHero() {
+                goToHero((currentHero + 1) % heroSlides.length);
+            }
+
+            function prevHero() {
+                goToHero((currentHero - 1 + heroSlides.length) % heroSlides.length);
+            }
+
+            function resetHeroTimer() {
+                clearInterval(heroInterval);
+                heroInterval = setInterval(nextHero, 6000);
+            }
+
+            heroDots.forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    goToHero(idx);
+                    resetHeroTimer();
+                });
+            });
+
+            prevBtn.addEventListener('click', function() {
+                prevHero();
+                resetHeroTimer();
+            });
+            nextBtn.addEventListener('click', function() {
+                nextHero();
+                resetHeroTimer();
+            });
+            heroInterval = setInterval(nextHero, 6000);
+
+            // ============================================
+            // 2. TESTIMONIALS SLIDER
+            // ============================================
+            const testiSlider = document.getElementById('testiSlider');
+            const testiSlides = testiSlider.querySelectorAll('.testi-slide');
+            const testiDots = document.querySelectorAll('#testiDots span');
+            let currentTesti = 0;
+            let testiInterval;
+
+            function goToTesti(index) {
+                testiSlides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                testiDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                currentTesti = index;
+            }
+
+            function nextTesti() {
+                goToTesti((currentTesti + 1) % testiSlides.length);
+            }
+
+            function resetTestiTimer() {
+                clearInterval(testiInterval);
+                testiInterval = setInterval(nextTesti, 5500);
+            }
+
+            testiDots.forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    goToTesti(idx);
+                    resetTestiTimer();
+                });
+            });
+            testiInterval = setInterval(nextTesti, 5500);
+
+            // ============================================
+            // 3. MOBILE HAMBURGER MENU
+            // ============================================
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('open');
+            });
+
+            navMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                }
+            });
+
+            // ============================================
+            // 4. AUTH SYSTEM (Login / Register / Logout / Lockout)
+            // ============================================
+
+            // --- DOM refs ---
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            const loginNavBtn = document.getElementById('loginNavBtn');
+            const registerNavBtn = document.getElementById('registerNavBtn');
+            const joinNowNav = document.getElementById('joinNowNav');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const closeRegisterModal = document.getElementById('closeRegisterModal');
+            const switchToRegister = document.getElementById('switchToRegisterFromLogin');
+            const switchToLogin = document.getElementById('switchToLoginFromRegister');
+
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const loginError = document.getElementById('loginError');
+            const registerError = document.getElementById('registerError');
+            const lockoutTimer = document.getElementById('lockoutTimer');
+            const lockoutCountdown = document.getElementById('lockoutCountdown');
+
+            const authLinks = document.getElementById('authLinks');
+            const userGreeting = document.getElementById('userGreeting');
+            const displayName = document.getElementById('displayName');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // --- Helpers ---
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('dobu_users')) || [];
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('dobu_users', JSON.stringify(users));
+            }
+
+            function getCurrentUser() {
+                return JSON.parse(localStorage.getItem('dobu_current_user'));
+            }
+
+            function setCurrentUser(user) {
+                localStorage.setItem('dobu_current_user', JSON.stringify(user));
+            }
+
+            function clearCurrentUser() {
+                localStorage.removeItem('dobu_current_user');
+            }
+
+            function getFailedAttempts() {
+                return parseInt(localStorage.getItem('dobu_failed_attempts')) || 0;
+            }
+
+            function setFailedAttempts(count) {
+                localStorage.setItem('dobu_failed_attempts', count.toString());
+            }
+
+            function getLockoutUntil() {
+                return parseInt(localStorage.getItem('dobu_lockout_until')) || 0;
+            }
+
+            function setLockoutUntil(timestamp) {
+                localStorage.setItem('dobu_lockout_until', timestamp.toString());
+            }
+
+            function isLockedOut() {
+                const until = getLockoutUntil();
+                return until > Date.now();
+            }
+
+            function getRemainingLockoutSeconds() {
+                const until = getLockoutUntil();
+                if (until <= Date.now()) return 0;
+                return Math.floor((until - Date.now()) / 1000);
+            }
+
+            // --- UI Update ---
+            function updateAuthUI() {
+                const user = getCurrentUser();
+                if (user) {
+                    authLinks.style.display = 'none';
+                    userGreeting.style.display = 'inline-flex';
+                    displayName.textContent = user.name || user.email;
+                } else {
+                    authLinks.style.display = 'inline-flex';
+                    userGreeting.style.display = 'none';
+                }
+            }
+
+            // --- Open / Close Modals ---
+            function openModal(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // Reset errors
+                loginError.classList.remove('show');
+                registerError.classList.remove('show');
+                if (modal === loginModal) {
+                    // Check lockout
+                    if (isLockedOut()) {
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                    } else {
+                        lockoutTimer.classList.remove('show');
+                    }
+                }
+            }
+
+            function closeModal(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                // Clear lockout timer interval if any
+                if (window._lockoutInterval) {
+                    clearInterval(window._lockoutInterval);
+                    window._lockoutInterval = null;
+                }
+            }
+
+            function startLockoutTimer() {
+                if (window._lockoutInterval) clearInterval(window._lockoutInterval);
+                window._lockoutInterval = setInterval(function() {
+                    const remaining = getRemainingLockoutSeconds();
+                    if (remaining <= 0) {
+                        lockoutTimer.classList.remove('show');
+                        clearInterval(window._lockoutInterval);
+                        window._lockoutInterval = null;
+                        // Reset attempts
+                        setFailedAttempts(0);
+                        setLockoutUntil(0);
+                        return;
+                    }
+                    lockoutCountdown.textContent = remaining;
+                }, 1000);
+                // initial set
+                const rem = getRemainingLockoutSeconds();
+                if (rem > 0) lockoutCountdown.textContent = rem;
+            }
+
+            // --- Event listeners for modals ---
+            loginNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(loginModal);
+            });
+            registerNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+            joinNowNav.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+
+            closeLoginModal.addEventListener('click', function() { closeModal(loginModal); });
+            closeRegisterModal.addEventListener('click', function() { closeModal(registerModal); });
+
+            // Switch between modals
+            switchToRegister.addEventListener('click', function() {
+                closeModal(loginModal);
+                openModal(registerModal);
+            });
+            switchToLogin.addEventListener('click', function() {
+                closeModal(registerModal);
+                openModal(loginModal);
+            });
+
+            // Click outside to close
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) closeModal(loginModal);
+            });
+            registerModal.addEventListener('click', function(e) {
+                if (e.target === registerModal) closeModal(registerModal);
+            });
+
+            // Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('active')) closeModal(loginModal);
+                    if (registerModal.classList.contains('active')) closeModal(registerModal);
+                }
+            });
+
+            // --- Register ---
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('regFullName').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regConfirmPassword').value;
+
+                registerError.classList.remove('show');
+
+                if (pass !== confirm) {
+                    registerError.textContent = 'Passwords do not match.';
+                    registerError.classList.add('show');
+                    return;
+                }
+                if (pass.length < 6) {
+                    registerError.textContent = 'Password must be at least 6 characters.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const users = getUsers();
+                if (users.find(u => u.email === email)) {
+                    registerError.textContent = 'This email is already registered. Please login.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const newUser = { name, email, password: pass };
+                users.push(newUser);
+                saveUsers(users);
+
+                // Auto-login after registration
+                setCurrentUser({ name, email });
+                updateAuthUI();
+                closeModal(registerModal);
+
+                // Reset form
+                registerForm.reset();
+                alert('✅ Registration successful! Welcome to DoBu, ' + name + '!');
+            });
+
+            // --- Login ---
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('loginPassword').value;
+
+                loginError.classList.remove('show');
+
+                // Check lockout
+                if (isLockedOut()) {
+                    loginError.textContent = 'Account locked. Please wait ' + getRemainingLockoutSeconds() +
+                        ' seconds.';
+                    loginError.classList.add('show');
+                    lockoutTimer.classList.add('show');
+                    startLockoutTimer();
+                    return;
+                }
+
+                const users = getUsers();
+                const user = users.find(u => u.email === email && u.password === pass);
+
+                if (!user) {
+                    // Failed attempt
+                    let attempts = getFailedAttempts() + 1;
+                    setFailedAttempts(attempts);
+
+                    if (attempts >= 3) {
+                        // Lock for 3 minutes (180 seconds)
+                        const lockUntil = Date.now() + 180000;
+                        setLockoutUntil(lockUntil);
+                        setFailedAttempts(0);
+                        loginError.textContent = 'Too many failed attempts. Account locked for 3 minutes.';
+                        loginError.classList.add('show');
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                        return;
+                    }
+
+                    loginError.textContent = `Invalid email or password. (${attempts}/3 attempts)`;
+                    loginError.classList.add('show');
+                    return;
+                }
+
+                // Success
+                setFailedAttempts(0);
+                setLockoutUntil(0);
+                setCurrentUser({ name: user.name, email: user.email });
+                updateAuthUI();
+                closeModal(loginModal);
+                loginForm.reset();
+                alert('👋 Welcome back, ' + user.name + '!');
+            });
+
+            // --- Logout ---
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    clearCurrentUser();
+                    updateAuthUI();
+                    alert('You have been logged out.');
+                }
+            });
+
+            // --- Initialize Auth UI ---
+            updateAuthUI();
+
+            // ============================================
+            // 5. COOKIE CONSENT
+            // ============================================
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const rejectCookies = document.getElementById('rejectCookies');
+
+            function checkCookieConsent() {
+                const consent = localStorage.getItem('dobu_cookie_consent');
+                if (consent === null) {
+                    cookieBanner.classList.add('show');
+                } else {
+                    cookieBanner.classList.remove('show');
+                }
+            }
+
+            function setCookieConsent(value) {
+                localStorage.setItem('dobu_cookie_consent', value);
+                cookieBanner.classList.remove('show');
+                if (value === 'accepted') {
+                    console.log('Cookies accepted. Analytics and personalization enabled.');
+                } else {
+                    console.log('Cookies rejected. Only essential cookies are used.');
+                }
+            }
+
+            acceptCookies.addEventListener('click', function() {
+                setCookieConsent('accepted');
+            });
+
+            rejectCookies.addEventListener('click', function() {
+                setCookieConsent('rejected');
+            });
+
+            checkCookieConsent();
+
+        })();
+    </script>
+
+</body>
+</html>

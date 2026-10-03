@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Timetable – DoBu Martial Arts</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+                   CSS VARIABLES
+                   ============================================================ */
+        :root {
+            --primary: #c0392b;
+            --primary-dark: #a93226;
+            --primary-light: #e74c3c;
+            --dark: #1a1a1a;
+            --dark-light: #2d2d2d;
+            --gray: #777;
+            --gray-light: #f4f4f4;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.18);
+            --radius: 16px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1280px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--gray-light);
+            color: var(--dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+                   BUTTONS
+                   ============================================================ */
+        .btn-primary {
+            display: inline-block;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(192, 57, 43, 0.45);
+        }
+
+        .btn-outline-sm {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn-outline-sm:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-outline-sm.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: var(--white);
+            padding: 8px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* ============================================================
+                   SECTION HEADERS
+                   ============================================================ */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 8px auto 0;
+        }
+
+        /* ============================================================
+                   NAVIGATION (WITH AUTH)
+                   ============================================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--dark);
+            padding: 14px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: #ccc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--white);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta-btn {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .nav-cta-btn::after {
+            display: none !important;
+        }
+
+        .nav-cta-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Auth Links in Nav */
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ccc;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .nav-auth .auth-link {
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .nav-auth .auth-link:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-auth .user-greeting {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ============================================================
+                   TIMETABLE HERO
+                   ============================================================ */
+        .timetable-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .timetable-hero .bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.45) saturate(1.2);
+            z-index: 0;
+        }
+
+        .timetable-hero .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 24px;
+        }
+
+        .timetable-hero .content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 8px;
+        }
+
+        .timetable-hero .content h1 i {
+            color: var(--primary-light);
+        }
+
+        .timetable-hero .content p {
+            font-size: 1.3rem;
+            opacity: 0.92;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .timetable-hero .breadcrumb {
+            margin-top: 16px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .timetable-hero .breadcrumb a {
+            color: var(--primary-light);
+        }
+
+        .timetable-hero .breadcrumb a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================================
+                   TODAY'S HIGHLIGHT
+                   ============================================================ */
+        .today-highlight {
+            padding: 40px 0;
+            background: var(--white);
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .today-highlight .highlight-box {
+            background: var(--dark);
+            color: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .today-highlight .highlight-box .left h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 4px;
+        }
+
+        .today-highlight .highlight-box .left h3 i {
+            margin-right: 10px;
+        }
+
+        .today-highlight .highlight-box .left p {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .today-highlight .highlight-box .right {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .today-highlight .highlight-box .right .class-chip {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-left: 3px solid var(--primary);
+        }
+
+        .today-highlight .highlight-box .right .class-chip .time {
+            color: #aaa;
+            font-weight: 400;
+            margin-right: 8px;
+        }
+
+        /* ============================================================
+                   FILTER BUTTONS
+                   ============================================================ */
+        .filter-section {
+            padding: 30px 0 10px 0;
+            background: var(--gray-light);
+        }
+
+        .filter-section .filter-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================================
+                   TIMETABLE TABLE
+                   ============================================================ */
+        .timetable-main {
+            padding: 40px 0 80px 0;
+            background: var(--gray-light);
+        }
+
+        .timetable-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            background: var(--white);
+            position: relative;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 780px;
+        }
+
+        /* Sticky Header */
+        .timetable thead th {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--dark);
+            color: var(--white);
+            padding: 16px 10px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.8rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .timetable thead th:first-child {
+            background: var(--primary);
+            min-width: 110px;
+            z-index: 30;
+            left: 0;
+        }
+
+        /* Sticky First Column (Time) */
+        .timetable tbody td:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            background: #fafafa;
+            font-weight: 700;
+            color: var(--primary);
+            border-right: 2px solid #e0e0e0;
+            min-width: 110px;
+        }
+
+        .timetable tbody td {
+            padding: 14px 8px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+            vertical-align: middle;
+        }
+
+        .timetable tbody tr:hover td {
+            background: rgba(192, 57, 43, 0.03);
+        }
+
+        .timetable tbody tr:hover td:first-child {
+            background: #f0f0f0;
+        }
+
+        /* Today Highlight Column */
+        .timetable tbody td.today-col {
+            background: rgba(192, 57, 43, 0.06);
+            border-left: 2px solid var(--primary);
+            border-right: 2px solid var(--primary);
+        }
+
+        .timetable tbody tr:hover td.today-col {
+            background: rgba(192, 57, 43, 0.10);
+        }
+
+        /* ============================================================
+                   BADGES (Color coded)
+                   ============================================================ */
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .badge-jiujitsu {
+            background: #8e44ad;
+            color: #fff;
+        }
+        .badge-judo {
+            background: #1abc9c;
+            color: #fff;
+        }
+        .badge-karate {
+            background: #e67e22;
+            color: #fff;
+        }
+        .badge-muaythai {
+            background: #e74c3c;
+            color: #fff;
+        }
+        .badge-kids {
+            background: #2ecc71;
+            color: #fff;
+        }
+        .badge-private {
+            background: #f39c12;
+            color: #fff;
+        }
+        .badge-open {
+            background: #3498db;
+            color: #fff;
+        }
+        .badge-empty {
+            background: transparent;
+            color: #ccc;
+            font-weight: 400;
+            font-size: 0.7rem;
+        }
+
+        /* ============================================================
+                   LEGEND
+                   ============================================================ */
+        .legend-section {
+            padding: 40px 0 0 0;
+            background: var(--gray-light);
+        }
+
+        .legend-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            padding: 20px 24px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .legend-item .swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+
+        /* ============================================================
+                   MODALS (Login / Register)
+                   ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 36px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+            animation: modalIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-box .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .modal-box .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-box h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .modal-box .subtitle {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .modal-box .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal-box .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .modal-box .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--gray-light);
+        }
+
+        .modal-box .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.1);
+        }
+
+        .modal-box .form-error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .modal-box .form-error.show {
+            display: block;
+        }
+
+        .modal-box .form-actions {
+            margin-top: 24px;
+        }
+
+        .modal-box .form-actions .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+
+        .modal-box .switch-auth {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .modal-box .switch-auth a {
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .modal-box .switch-auth a:hover {
+            text-decoration: underline;
+        }
+
+        /* Lockout timer */
+        .lockout-timer {
+            background: #fde8e8;
+            border: 1px solid #f5c6c6;
+            color: #c0392b;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .lockout-timer.show {
+            display: block;
+        }
+
+        /* ============================================================
+                   COOKIE CONSENT BANNER
+                   ============================================================ */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark);
+            color: #ddd;
+            padding: 20px 24px;
+            z-index: 2000;
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            border-top: 3px solid var(--primary);
+        }
+
+        .cookie-banner.show {
+            display: block;
+        }
+
+        .cookie-banner .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cookie-banner .cookie-text {
+            flex: 1;
+            font-size: 0.9rem;
+            min-width: 200px;
+        }
+
+        .cookie-banner .cookie-text a {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .cookie-banner .cookie-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner .btn-cookie-accept {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cookie-banner .btn-cookie-accept:hover {
+            background: var(--primary-dark);
+            transform: scale(1.03);
+        }
+
+        .cookie-banner .btn-cookie-reject {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #555;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cookie-banner .btn-cookie-reject:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        /* ============================================================
+                   CTA BANNER
+                   ============================================================ */
+        .cta {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            padding: 64px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 32px;
+        }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        footer {
+            background: #0d0d0d;
+            color: #aaa;
+            padding: 56px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-grid h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-grid ul li {
+            padding: 4px 0;
+        }
+
+        .footer-grid ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .footer-social a {
+            font-size: 1.6rem;
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2a2a2a;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================
+                   ANIMATIONS
+                   ============================================================ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .timetable {
+                font-size: 0.8rem;
+                min-width: 720px;
+            }
+            .timetable thead th,
+            .timetable tbody td {
+                padding: 12px 6px;
+            }
+            .badge {
+                font-size: 0.65rem;
+                padding: 3px 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--dark);
+                padding: 20px 0;
+                gap: 16px;
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-auth {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .timetable-hero {
+                height: 40vh;
+                min-height: 280px;
+            }
+            .timetable-hero .content h1 {
+                font-size: 2.4rem;
+            }
+            .timetable-hero .content p {
+                font-size: 1rem;
+            }
+
+            .today-highlight .highlight-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 20px;
+            }
+            .today-highlight .highlight-box .right {
+                justify-content: center;
+            }
+
+            .legend-grid {
+                gap: 10px 16px;
+                padding: 16px;
+            }
+            .legend-item {
+                font-size: 0.75rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .timetable {
+                font-size: 0.7rem;
+                min-width: 620px;
+            }
+            .timetable thead th,
+            .timetable tbody td {
+                padding: 10px 4px;
+            }
+            .badge {
+                font-size: 0.6rem;
+                padding: 2px 8px;
+            }
+            .timetable thead th:first-child,
+            .timetable tbody td:first-child {
+                min-width: 70px;
+            }
+
+            .modal-box {
+                padding: 28px 20px;
+            }
+
+            .cookie-banner .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .timetable-hero .content h1 {
+                font-size: 1.8rem;
+            }
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+            .btn-primary {
+                padding: 12px 28px;
+                font-size: 0.85rem;
+            }
+            .filter-section .filter-group {
+                gap: 6px;
+            }
+            .btn-outline-sm {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+            }
+            .timetable {
+                font-size: 0.6rem;
+                min-width: 520px;
+            }
+            .badge {
+                font-size: 0.5rem;
+                padding: 2px 6px;
+            }
+            .timetable thead th {
+                font-size: 0.6rem;
+                padding: 8px 2px;
+            }
+            .timetable tbody td {
+                padding: 8px 2px;
+            }
+            .timetable thead th:first-child,
+            .timetable tbody td:first-child {
+                min-width: 55px;
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+    NAVIGATION (WITH AUTH)
+    ============================================================ -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">DoBu<span>.</span></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="timetable.html" style="color:#fff;">Timetable</a></li>
+                <li><a href="prices.html">Prices</a></li>
+                <li><a href="Instructor.html">Instructors</a></li>
+                <li><a href="forumn.html">Forum</a></li>
+                <li><a href="#" class="nav-cta-btn" id="joinNowNav">Join Now</a></li>
+                <!-- Auth Section -->
+                <li class="nav-auth" id="authSection">
+                    <span id="authLinks">
+                        <span class="auth-link" id="loginNavBtn"><i class="fas fa-sign-in-alt"></i> Login</span>
+                        <span class="auth-link" id="registerNavBtn"><i class="fas fa-user-plus"></i> Register</span>
+                    </span>
+                    <span id="userGreeting" style="display:none;">
+                        <span class="user-greeting"><i class="fas fa-user-circle"></i> <span id="displayName">User</span></span>
+                        <button class="btn-danger" id="logoutBtn" style="padding:4px 14px; font-size:0.75rem;">Logout</button>
+                    </span>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    TIMETABLE HERO
+    ============================================================ -->
+    <section class="timetable-hero">
+        <div class="bg" style="background-image: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=1400');"></div>
+        <div class="content">
+            <h1><i class="fas fa-calendar-alt"></i> Class Timetable</h1>
+            <p>Plan your week. Train your best. Classes run 7 days a week.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> &nbsp;/&nbsp; Timetable
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    TODAY'S HIGHLIGHT (Dynamic)
+    ============================================================ -->
+    <section class="today-highlight">
+        <div class="container">
+            <div class="highlight-box" id="todayHighlight">
+                <div class="left">
+                    <h3><i class="fas fa-star"></i> <span id="todayName">Today's</span> Classes</h3>
+                    <p>Here's what's on the mat for <span id="todayDate"></span>.</p>
+                </div>
+                <div class="right" id="todayClasses">
+                    <!-- Dynamically populated by JavaScript -->
+                    <span class="class-chip">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FILTER SECTION
+    ============================================================ -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-group" id="filterGroup">
+                <button class="btn-outline-sm active" data-filter="all">All Classes</button>
+                <button class="btn-outline-sm" data-filter="jiujitsu">Jiu-jitsu</button>
+                <button class="btn-outline-sm" data-filter="judo">Judo</button>
+                <button class="btn-outline-sm" data-filter="karate">Karate</button>
+                <button class="btn-outline-sm" data-filter="muaythai">Muay Thai</button>
+                <button class="btn-outline-sm" data-filter="kids">Kids</button>
+                <button class="btn-outline-sm" data-filter="private">Private</button>
+                <button class="btn-outline-sm" data-filter="open">Open Mat</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    LEGEND
+    ============================================================ -->
+    <section class="legend-section">
+        <div class="container">
+            <div class="legend-grid animate-on-scroll">
+                <span class="legend-item"><span class="swatch" style="background:#8e44ad;"></span> Jiu-jitsu</span>
+                <span class="legend-item"><span class="swatch" style="background:#1abc9c;"></span> Judo</span>
+                <span class="legend-item"><span class="swatch" style="background:#e67e22;"></span> Karate</span>
+                <span class="legend-item"><span class="swatch" style="background:#e74c3c;"></span> Muay Thai</span>
+                <span class="legend-item"><span class="swatch" style="background:#2ecc71;"></span> Kids (6–12)</span>
+                <span class="legend-item"><span class="swatch" style="background:#f39c12;"></span> Private Tuition</span>
+                <span class="legend-item"><span class="swatch" style="background:#3498db;"></span> Open Mat</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FULL TIMETABLE
+    ============================================================ -->
+    <section class="timetable-main">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weekly Schedule</h2>
+                <p>All classes are subject to change. Please check with reception for updates.</p>
+            </div>
+            <div class="timetable-wrapper animate-on-scroll">
+                <table class="timetable" id="timetableTable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th data-day="mon">Monday</th>
+                            <th data-day="tue">Tuesday</th>
+                            <th data-day="wed">Wednesday</th>
+                            <th data-day="thu">Thursday</th>
+                            <th data-day="fri">Friday</th>
+                            <th data-day="sat">Saturday</th>
+                            <th data-day="sun">Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 06:00 – 07:30 -->
+                        <tr>
+                            <td>06:00 – 07:30</td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-karate"><span class="badge badge-karate">Karate</span></td>
+                            <td class="cell-judo"><span class="badge badge-judo">Judo</span></td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-muaythai"><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                        </tr>
+
+                        <!-- 08:00 – 10:00 -->
+                        <tr>
+                            <td>08:00 – 10:00</td>
+                            <td class="cell-muaythai"><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                        </tr>
+
+                        <!-- 10:30 – 12:00 -->
+                        <tr>
+                            <td>10:30 – 12:00</td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-judo"><span class="badge badge-judo">Judo</span></td>
+                            <td class="cell-karate"><span class="badge badge-karate">Karate</span></td>
+                        </tr>
+
+                        <!-- 13:00 – 14:30 -->
+                        <tr>
+                            <td>13:00 – 14:30</td>
+                            <td class="cell-open"><span class="badge badge-open">Open Mat</span></td>
+                            <td class="cell-open"><span class="badge badge-open">Open Mat</span></td>
+                            <td class="cell-open"><span class="badge badge-open">Open Mat</span></td>
+                            <td class="cell-open"><span class="badge badge-open">Open Mat</span></td>
+                            <td class="cell-open"><span class="badge badge-open">Open Mat</span></td>
+                            <td class="cell-karate"><span class="badge badge-karate">Karate</span></td>
+                            <td class="cell-judo"><span class="badge badge-judo">Judo</span></td>
+                        </tr>
+
+                        <!-- 15:00 – 17:00 -->
+                        <tr>
+                            <td>15:00 – 17:00</td>
+                            <td class="cell-kids"><span class="badge badge-kids">Kids Jiu-jitsu</span></td>
+                            <td class="cell-kids"><span class="badge badge-kids">Kids Judo</span></td>
+                            <td class="cell-kids"><span class="badge badge-kids">Kids Karate</span></td>
+                            <td class="cell-kids"><span class="badge badge-kids">Kids Jiu-jitsu</span></td>
+                            <td class="cell-kids"><span class="badge badge-kids">Kids Judo</span></td>
+                            <td class="cell-muaythai"><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                        </tr>
+
+                        <!-- 17:30 – 19:00 -->
+                        <tr>
+                            <td>17:30 – 19:00</td>
+                            <td class="cell-karate"><span class="badge badge-karate">Karate</span></td>
+                            <td class="cell-muaythai"><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td class="cell-judo"><span class="badge badge-judo">Judo</span></td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-muaythai"><span class="badge badge-muaythai">Muay Thai</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                        </tr>
+
+                        <!-- 19:00 – 21:00 -->
+                        <tr>
+                            <td>19:00 – 21:00</td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-judo"><span class="badge badge-judo">Judo</span></td>
+                            <td class="cell-jiujitsu"><span class="badge badge-jiujitsu">Jiu-jitsu</span></td>
+                            <td class="cell-karate"><span class="badge badge-karate">Karate</span></td>
+                            <td class="cell-private"><span class="badge badge-private">Private</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                            <td class="cell-empty"><span class="badge badge-empty">—</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align:center; margin-top: 20px; color:var(--gray); font-size:0.85rem;">
+                <i class="fas fa-info-circle"></i> 
+                <span style="background:var(--primary); color:#fff; padding:2px 10px; border-radius:4px; font-weight:700;">TODAY</span> column is automatically highlighted based on your device's date.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA BANNER
+    ============================================================ -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Step on the Mat?</h2>
+            <p>Book your first session today and start your martial arts journey.</p>
+            <a href="#" class="btn-primary" style="font-size: 1.1rem; padding: 16px 48px;">Book Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="font-size:1.6rem;">DoBu<span>.</span></div>
+                    <p style="margin-top: 12px; max-width: 280px;">
+                        Building strength, discipline, and confidence through
+                        world-class martial arts training.
+                    </p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="classes.html">Classes</a></li>
+                        <li><a href="prices.html">Prices</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 DoBu Martial Arts. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    COOKIE CONSENT BANNER
+    ============================================================ -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="container">
+            <div class="cookie-text">
+                <strong><i class="fas fa-cookie-bite"></i> We value your privacy.</strong>
+                We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                <a href="#">Learn More</a>.
+            </div>
+            <div class="cookie-actions">
+                <button class="btn-cookie-reject" id="rejectCookies">Reject</button>
+                <button class="btn-cookie-accept" id="acceptCookies">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    LOGIN MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+            <h2><i class="fas fa-sign-in-alt" style="color:var(--primary);"></i> Login</h2>
+            <p class="subtitle">Welcome back! Please log in to your account.</p>
+
+            <div class="lockout-timer" id="lockoutTimer">
+                <i class="fas fa-clock"></i> Too many failed attempts. Please wait <span id="lockoutCountdown">180</span> seconds.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required />
+                </div>
+                <div class="form-error" id="loginError">Invalid email or password.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+                <div class="switch-auth">
+                    Don't have an account? <a id="switchToRegisterFromLogin">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    REGISTER MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeRegisterModal">&times;</button>
+            <h2><i class="fas fa-user-plus" style="color:var(--primary);"></i> Create Account</h2>
+            <p class="subtitle">Join the DoBu community today. It's free!</p>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regFullName">Full Name</label>
+                    <input type="text" id="regFullName" placeholder="John Doe" required />
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Min 6 characters" required minlength="6" />
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password" required />
+                </div>
+                <div class="form-error" id="registerError">Passwords do not match or email already exists.</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Register</button>
+                </div>
+                <div class="switch-auth">
+                    Already have an account? <a id="switchToLoginFromRegister">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================
+            // 1. MOBILE HAMBURGER MENU
+            // ============================================
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('open');
+            });
+
+            navMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                }
+            });
+
+            // ============================================
+            // 2. SCROLL ANIMATIONS
+            // ============================================
+            document.addEventListener('DOMContentLoaded', function() {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+
+                document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+                    observer.observe(el);
+                });
+            });
+
+            // ============================================
+            // 3. TODAY'S HIGHLIGHT & COLUMN HIGHLIGHT
+            // ============================================
+            function getDayData() {
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const shortDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                const now = new Date();
+                const dayIndex = now.getDay();
+                return {
+                    name: days[dayIndex],
+                    short: shortDays[dayIndex],
+                    index: dayIndex,
+                    date: now.toLocaleDateString('en-GB', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })
+                };
+            }
+
+            function populateTodayHighlight() {
+                const today = getDayData();
+                document.getElementById('todayName').textContent = today.name + "'s";
+                document.getElementById('todayDate').textContent = today.date;
+
+                const colMap = {
+                    'sun': 7,
+                    'mon': 1,
+                    'tue': 2,
+                    'wed': 3,
+                    'thu': 4,
+                    'fri': 5,
+                    'sat': 6
+                };
+                const colIndex = colMap[today.short];
+
+                const table = document.getElementById('timetableTable');
+                const allRows = table.querySelectorAll('tbody tr');
+
+                table.querySelectorAll('td.today-col').forEach(function(td) {
+                    td.classList.remove('today-col');
+                });
+
+                allRows.forEach(function(row) {
+                    const cells = row.querySelectorAll('td');
+                    if (cells[colIndex]) {
+                        cells[colIndex].classList.add('today-col');
+                    }
+                });
+
+                const headers = table.querySelectorAll('thead th');
+                headers.forEach(function(th, idx) {
+                    if (idx === colIndex) {
+                        th.style.background = '#c0392b';
+                        th.style.color = '#fff';
+                    } else if (idx !== 0) {
+                        th.style.background = '#1a1a1a';
+                        th.style.color = '#fff';
+                    }
+                });
+
+                const todayContainer = document.getElementById('todayClasses');
+                const dayShort = today.short;
+
+                const schedule = {
+                    mon: [
+                        { time: '06:00', name: 'Jiu-jitsu' },
+                        { time: '08:00', name: 'Muay Thai' },
+                        { time: '10:30', name: 'Private' },
+                        { time: '13:00', name: 'Open Mat' },
+                        { time: '15:00', name: 'Kids Jiu-jitsu' },
+                        { time: '17:30', name: 'Karate' },
+                        { time: '19:00', name: 'Jiu-jitsu' }
+                    ],
+                    tue: [
+                        { time: '06:00', name: 'Karate' },
+                        { time: '08:00', name: 'Private' },
+                        { time: '10:30', name: 'Private' },
+                        { time: '13:00', name: 'Open Mat' },
+                        { time: '15:00', name: 'Kids Judo' },
+                        { time: '17:30', name: 'Muay Thai' },
+                        { time: '19:00', name: 'Judo' }
+                    ],
+                    wed: [
+                        { time: '06:00', name: 'Judo' },
+                        { time: '08:00', name: 'Private' },
+                        { time: '10:30', name: 'Private' },
+                        { time: '13:00', name: 'Open Mat' },
+                        { time: '15:00', name: 'Kids Karate' },
+                        { time: '17:30', name: 'Judo' },
+                        { time: '19:00', name: 'Jiu-jitsu' }
+                    ],
+                    thu: [
+                        { time: '06:00', name: 'Jiu-jitsu' },
+                        { time: '08:00', name: 'Private' },
+                        { time: '10:30', name: 'Private' },
+                        { time: '13:00', name: 'Open Mat' },
+                        { time: '15:00', name: 'Kids Jiu-jitsu' },
+                        { time: '17:30', name: 'Jiu-jitsu' },
+                        { time: '19:00', name: 'Karate' }
+                    ],
+                    fri: [
+                        { time: '06:00', name: 'Muay Thai' },
+                        { time: '08:00', name: 'Jiu-jitsu' },
+                        { time: '10:30', name: 'Private' },
+                        { time: '13:00', name: 'Open Mat' },
+                        { time: '15:00', name: 'Kids Judo' },
+                        { time: '17:30', name: 'Muay Thai' },
+                        { time: '19:00', name: 'Private' }
+                    ],
+                    sat: [
+                        { time: '08:00', name: 'Private' },
+                        { time: '10:30', name: 'Judo' },
+                        { time: '13:00', name: 'Karate' },
+                        { time: '15:00', name: 'Muay Thai' }
+                    ],
+                    sun: [
+                        { time: '08:00', name: 'Private' },
+                        { time: '10:30', name: 'Karate' },
+                        { time: '13:00', name: 'Judo' },
+                        { time: '15:00', name: 'Jiu-jitsu' }
+                    ]
+                };
+
+                const todaySchedule = schedule[dayShort] || [];
+                if (todaySchedule.length > 0) {
+                    let html = '';
+                    todaySchedule.forEach(function(cls) {
+                        html +=
+                            `<span class="class-chip"><span class="time">${cls.time}</span> ${cls.name}</span>`;
+                    });
+                    todayContainer.innerHTML = html;
+                } else {
+                    todayContainer.innerHTML = `<span class="class-chip">No classes scheduled today.</span>`;
+                }
+            }
+
+            // ============================================
+            // 4. FILTER FUNCTIONALITY
+            // ============================================
+            function initFilters() {
+                const filterButtons = document.querySelectorAll('#filterGroup .btn-outline-sm');
+
+                filterButtons.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        filterButtons.forEach(function(b) { b.classList.remove('active'); });
+                        this.classList.add('active');
+
+                        const filter = this.dataset.filter;
+                        const allCells = document.querySelectorAll('#timetableTable tbody td');
+
+                        if (filter === 'all') {
+                            allCells.forEach(function(cell) {
+                                cell.style.display = '';
+                            });
+                            document.querySelectorAll('#timetableTable .badge').forEach(function(badge) {
+                                badge.style.opacity = '1';
+                            });
+                            return;
+                        }
+
+                        const filterClass = 'cell-' + filter;
+
+                        allCells.forEach(function(cell) {
+                            if (cell.parentElement && cell.parentElement.querySelector('td:first-child') ===
+                                cell) {
+                                return;
+                            }
+                            if (cell.classList.contains(filterClass)) {
+                                cell.style.display = '';
+                                const badge = cell.querySelector('.badge');
+                                if (badge) badge.style.opacity = '1';
+                            } else {
+                                cell.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            // ============================================
+            // 5. AUTH SYSTEM (Login / Register / Logout / Lockout)
+            // ============================================
+
+            // --- DOM refs ---
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            const loginNavBtn = document.getElementById('loginNavBtn');
+            const registerNavBtn = document.getElementById('registerNavBtn');
+            const joinNowNav = document.getElementById('joinNowNav');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const closeRegisterModal = document.getElementById('closeRegisterModal');
+            const switchToRegister = document.getElementById('switchToRegisterFromLogin');
+            const switchToLogin = document.getElementById('switchToLoginFromRegister');
+
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const loginError = document.getElementById('loginError');
+            const registerError = document.getElementById('registerError');
+            const lockoutTimer = document.getElementById('lockoutTimer');
+            const lockoutCountdown = document.getElementById('lockoutCountdown');
+
+            const authLinks = document.getElementById('authLinks');
+            const userGreeting = document.getElementById('userGreeting');
+            const displayName = document.getElementById('displayName');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // --- Helpers ---
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('dobu_users')) || [];
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('dobu_users', JSON.stringify(users));
+            }
+
+            function getCurrentUser() {
+                return JSON.parse(localStorage.getItem('dobu_current_user'));
+            }
+
+            function setCurrentUser(user) {
+                localStorage.setItem('dobu_current_user', JSON.stringify(user));
+            }
+
+            function clearCurrentUser() {
+                localStorage.removeItem('dobu_current_user');
+            }
+
+            function getFailedAttempts() {
+                return parseInt(localStorage.getItem('dobu_failed_attempts')) || 0;
+            }
+
+            function setFailedAttempts(count) {
+                localStorage.setItem('dobu_failed_attempts', count.toString());
+            }
+
+            function getLockoutUntil() {
+                return parseInt(localStorage.getItem('dobu_lockout_until')) || 0;
+            }
+
+            function setLockoutUntil(timestamp) {
+                localStorage.setItem('dobu_lockout_until', timestamp.toString());
+            }
+
+            function isLockedOut() {
+                const until = getLockoutUntil();
+                return until > Date.now();
+            }
+
+            function getRemainingLockoutSeconds() {
+                const until = getLockoutUntil();
+                if (until <= Date.now()) return 0;
+                return Math.floor((until - Date.now()) / 1000);
+            }
+
+            // --- UI Update ---
+            function updateAuthUI() {
+                const user = getCurrentUser();
+                if (user) {
+                    authLinks.style.display = 'none';
+                    userGreeting.style.display = 'inline-flex';
+                    displayName.textContent = user.name || user.email;
+                } else {
+                    authLinks.style.display = 'inline-flex';
+                    userGreeting.style.display = 'none';
+                }
+            }
+
+            // --- Open / Close Modals ---
+            function openModal(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                loginError.classList.remove('show');
+                registerError.classList.remove('show');
+                if (modal === loginModal) {
+                    if (isLockedOut()) {
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                    } else {
+                        lockoutTimer.classList.remove('show');
+                    }
+                }
+            }
+
+            function closeModal(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (window._lockoutInterval) {
+                    clearInterval(window._lockoutInterval);
+                    window._lockoutInterval = null;
+                }
+            }
+
+            function startLockoutTimer() {
+                if (window._lockoutInterval) clearInterval(window._lockoutInterval);
+                window._lockoutInterval = setInterval(function() {
+                    const remaining = getRemainingLockoutSeconds();
+                    if (remaining <= 0) {
+                        lockoutTimer.classList.remove('show');
+                        clearInterval(window._lockoutInterval);
+                        window._lockoutInterval = null;
+                        setFailedAttempts(0);
+                        setLockoutUntil(0);
+                        return;
+                    }
+                    lockoutCountdown.textContent = remaining;
+                }, 1000);
+                const rem = getRemainingLockoutSeconds();
+                if (rem > 0) lockoutCountdown.textContent = rem;
+            }
+
+            // --- Event listeners for modals ---
+            loginNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(loginModal);
+            });
+            registerNavBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+            joinNowNav.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(registerModal);
+            });
+
+            closeLoginModal.addEventListener('click', function() { closeModal(loginModal); });
+            closeRegisterModal.addEventListener('click', function() { closeModal(registerModal); });
+
+            switchToRegister.addEventListener('click', function() {
+                closeModal(loginModal);
+                openModal(registerModal);
+            });
+            switchToLogin.addEventListener('click', function() {
+                closeModal(registerModal);
+                openModal(loginModal);
+            });
+
+            loginModal.addEventListener('click', function(e) {
+                if (e.target === loginModal) closeModal(loginModal);
+            });
+            registerModal.addEventListener('click', function(e) {
+                if (e.target === registerModal) closeModal(registerModal);
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (loginModal.classList.contains('active')) closeModal(loginModal);
+                    if (registerModal.classList.contains('active')) closeModal(registerModal);
+                }
+            });
+
+            // --- Register ---
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('regFullName').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regConfirmPassword').value;
+
+                registerError.classList.remove('show');
+
+                if (pass !== confirm) {
+                    registerError.textContent = 'Passwords do not match.';
+                    registerError.classList.add('show');
+                    return;
+                }
+                if (pass.length < 6) {
+                    registerError.textContent = 'Password must be at least 6 characters.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const users = getUsers();
+                if (users.find(u => u.email === email)) {
+                    registerError.textContent = 'This email is already registered. Please login.';
+                    registerError.classList.add('show');
+                    return;
+                }
+
+                const newUser = { name, email, password: pass };
+                users.push(newUser);
+                saveUsers(users);
+
+                setCurrentUser({ name, email });
+                updateAuthUI();
+                closeModal(registerModal);
+                registerForm.reset();
+                alert('✅ Registration successful! Welcome to DoBu, ' + name + '!');
+            });
+
+            // --- Login ---
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('loginPassword').value;
+
+                loginError.classList.remove('show');
+
+                if (isLockedOut()) {
+                    loginError.textContent = 'Account locked. Please wait ' + getRemainingLockoutSeconds() +
+                        ' seconds.';
+                    loginError.classList.add('show');
+                    lockoutTimer.classList.add('show');
+                    startLockoutTimer();
+                    return;
+                }
+
+                const users = getUsers();
+                const user = users.find(u => u.email === email && u.password === pass);
+
+                if (!user) {
+                    let attempts = getFailedAttempts() + 1;
+                    setFailedAttempts(attempts);
+
+                    if (attempts >= 3) {
+                        const lockUntil = Date.now() + 180000;
+                        setLockoutUntil(lockUntil);
+                        setFailedAttempts(0);
+                        loginError.textContent = 'Too many failed attempts. Account locked for 3 minutes.';
+                        loginError.classList.add('show');
+                        lockoutTimer.classList.add('show');
+                        startLockoutTimer();
+                        return;
+                    }
+
+                    loginError.textContent = `Invalid email or password. (${attempts}/3 attempts)`;
+                    loginError.classList.add('show');
+                    return;
+                }
+
+                setFailedAttempts(0);
+                setLockoutUntil(0);
+                setCurrentUser({ name: user.name, email: user.email });
+                updateAuthUI();
+                closeModal(loginModal);
+                loginForm.reset();
+                alert('👋 Welcome back, ' + user.name + '!');
+            });
+
+            // --- Logout ---
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    clearCurrentUser();
+                    updateAuthUI();
+                    alert('You have been logged out.');
+                }
+            });
+
+            // --- Initialize Auth UI ---
+            updateAuthUI();
+
+            // ============================================
+            // 6. COOKIE CONSENT
+            // ============================================
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const rejectCookies = document.getElementById('rejectCookies');
+
+            function checkCookieConsent() {
+                const consent = localStorage.getItem('dobu_cookie_consent');
+                if (consent === null) {
+                    cookieBanner.classList.add('show');
+                } else {
+                    cookieBanner.classList.remove('show');
+                }
+            }
+
+            function setCookieConsent(value) {
+                localStorage.setItem('dobu_cookie_consent', value);
+                cookieBanner.classList.remove('show');
+            }
+
+            acceptCookies.addEventListener('click', function() {
+                setCookieConsent('accepted');
+            });
+
+            rejectCookies.addEventListener('click', function() {
+                setCookieConsent('rejected');
+            });
+
+            checkCookieConsent();
+
+            // ============================================
+            // 7. INIT ON LOAD (Timetable functions)
+            // ============================================
+            document.addEventListener('DOMContentLoaded', function() {
+                populateTodayHighlight();
+                initFilters();
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
